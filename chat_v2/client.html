@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat Khatam</title>
+	<script type="text/javascript" src="http://127.0.0.1:1337/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+	function sendMessage(){
+		var msg = document.getElementById("messageInput").value;
+		socket.emit("message_to_server", {message : msg});
+	}
+		var socket = io.connect("127.0.0.1:1337");
+		socket.on("message_to_client",function(data){
+			document.getElementById("chatLog").innerHTML= data['message'];
+		});
+
+	</script>
+</head>
+<body>
+<input type="text" name="" id="messageInput"></input>
+<button onclick="sendMessage()">Send</button>
+<div id="chatLog"></div>
+</body>
+</html>
